@@ -54,3 +54,32 @@ def exibir_quiz():
             "resposta": "b"
         }
     ]
+    
+    pontuacao = 0
+
+    for i, pergunta in enumerate(perguntas, start=1):
+        print(f"\nPergunta {i}: {pergunta['pergunta']}")
+        for opcao in pergunta['opcoes']:
+            print(opcao)
+        
+        resposta_usuario = input("Sua resposta (a/b/c/d): ").strip().lower()
+
+        while resposta_usuario not in ['a', 'b', 'c', 'd']:
+            resposta_usuario = input("Por favor, escolha entre a, b, c ou d: ").strip().lower()
+
+        if resposta_usuario == pergunta['resposta']:
+            print("Correto!")
+            pontuacao += 1
+        else:
+            opcao_correta = next(op for op in pergunta['opcoes'] if op.startswith(pergunta['resposta']))
+            print(f"Errado! A resposta correta é {opcao_correta}")
+
+        input("Pressione Enter para continuar...")
+
+    print(f"\nQuiz finalizado! Sua pontuação: {pontuacao} de {len(perguntas)}")
+    print("Obrigado por jogar!")
+    print("\nCréditos: José Eduardo e Rafael Kenedy")
+    input("Pressione Enter para sair...")
+
+if __name__ == "__main__":
+    exibir_quiz()
